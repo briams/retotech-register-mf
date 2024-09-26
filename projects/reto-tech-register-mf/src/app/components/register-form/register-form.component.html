@@ -1,0 +1,115 @@
+<mat-card class="card-auth">
+  <rt-header title="Registro" />
+
+  <form novalidate [formGroup]="form">
+    <div class="grid gap-2">
+      <div class="col-12">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Nombre</mat-label>
+
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Juan Lopez"
+            type="text"
+            (input)="setFieldTouched('name')"
+          />
+
+          <mat-icon matSuffix>person </mat-icon>
+
+          <mat-error *ngIf="isInvalidField('name')">
+            {{getErrorMessage('name')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>E-mail</mat-label>
+
+          <input
+            matInput
+            formControlName="email"
+            placeholder="example@example.com"
+            type="email"
+            (input)="setFieldTouched('email')"
+          />
+
+          <mat-icon matSuffix>
+            alternate_email
+          </mat-icon>
+
+          <mat-error *ngIf="isInvalidField('email')">
+            {{getErrorMessage('email')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+
+          <input
+            matInput
+            formControlName="password"
+            placeholder="******"
+            [type]="hidePass ? 'password' : 'text'"
+            (input)="setFieldTouched('password')"
+          />
+
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickIconPassInput($event)"
+          >
+            <mat-icon>
+              {{hidePass ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+
+          <mat-error *ngIf="isInvalidField('password')">
+            {{getErrorMessage('password')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Confirma tu Contraseña</mat-label>
+
+          <input
+            matInput
+            formControlName="passwordConfirm"
+            placeholder="******"
+            [type]="hidePass ? 'password' : 'text'"
+            (input)="setFieldTouched('passwordConfirm')"
+          />
+
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickIconPassInput($event)"
+          >
+            <mat-icon>
+              {{hidePass ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+
+          <mat-error *ngIf="isInvalidField('passwordConfirm')">
+            {{getErrorMessage('passwordConfirm')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <button
+          mat-flat-button
+          class="w-full"
+          type="button"
+          color="primary"
+          [disabled]="!form.valid"
+          (click)="onRegister()"
+        >
+          Registrar
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-card>
